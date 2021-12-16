@@ -340,11 +340,12 @@ namespace RSS.Controllers
                     _var = 2;
                     WhereClauseAdd = "and PravasiKaryakarta.RefID=" + Nagar.BhagIDCHeck + " OR Yadi.BhagID=" + Nagar.BhagIDCHeck;
                 }
-                //if (Nagar.BhagIDCHeck.ToString() != "0")
-                //{
-                //    _var = 2;
-                //    WhereClauseAdd = "and PravasiKaryakarta.RefID=" + Nagar.BhagIDCHeck + " OR Yadi.BhagID=" + Nagar.BhagIDCHeck;
-                //}
+
+                if (Nagar.NagarIDCHeck.ToString() != "0")
+                {
+                    _var = 3;
+                    WhereClauseAdd = "and PravasiKaryakarta.RefID=" + Nagar.NagarIDCHeck + " OR Yadi.Nagarid=" + Nagar.BhagIDCHeck;
+                }
 
                 var WhereClause = "where PravasiKaryakarta.StarID=" + _var;
                 WhereClause = WhereClause + WhereClauseAdd;

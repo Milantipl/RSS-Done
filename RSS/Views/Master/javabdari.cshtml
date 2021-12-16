@@ -169,18 +169,76 @@
                 }
             });
 
-            $("#customCheckbox3").click(function () {
+            $("#customCheckbox4").click(function () {
                 var TValidate = true;
 
                 if (TValidate) {
                     if ($(this).is(":checked"))
-                        alert('you are unchecked ' + $("#drpBhag").val());
+                        /*alert('you are unchecked ' + $("#drpNagar").val());*/
                 }
                 if (TValidate) {
                     $.ajax({
                         type: "POST",
                         url: "/Master/SearchViNagar",
-                        data: { BhagIDCHeck : $("#drpBhag").val() },
+                        data: { NagarIDCHeck: $("#drpNagar").val() },
+                        timeout: 600000,
+                        beforeSend: function () {
+                            $('#milan').css("display", 'block');
+                        },
+                        success: function (data) {
+                            if (data == "-1") {
+                                window.location.href = "/account/logoff";
+                            }
+                            else if (data == "0") {
+
+                                toastr.error("Record Not Found!! ");
+
+                            }
+                            else {
+                                $("#Datalist").html(data);
+
+                            }
+                        },
+                        complete: function () {
+                            $('#milan').css("display", 'none');
+                        },
+                    })
+                }
+            });
+
+            $("#customCheckbox3").click(function () {
+                var TValidate = true;
+
+                if (TValidate) {
+                    if ($(this).is(":checked"))
+                        /*alert('you are unchecked ' + $("#drpBhag").val());*/
+                }
+                if (TValidate) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Master/SearchViNagar",
+                        data: { BhagIDCHeck: $("#drpBhag").val() },
+                        timeout: 600000,
+                        beforeSend: function () {
+                            $('#milan').css("display", 'block');
+                        },
+                        success: function (data) {
+                            if (data == "-1") {
+                                window.location.href = "/account/logoff";
+                            }
+                            else if (data == "0") {
+
+                                toastr.error("Record Not Found!! ");
+
+                            }
+                            else {
+                                $("#Datalist").html(data);
+
+                            }
+                        },
+                        complete: function () {
+                            $('#milan').css("display", 'none');
+                        },
                     })
                 }
             });

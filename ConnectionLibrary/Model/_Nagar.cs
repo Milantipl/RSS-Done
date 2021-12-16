@@ -11,6 +11,7 @@ namespace ConnectionLibrary.Model
         public int PrantID { get; set; }
         public int VibhagID { get; set; }
         public int NagarID { get; set; }
+        public int NagarIDCHeck { get; set; }
         public string Bhag { get; set; }
         public string Nagar { get; set; }
         public  string Vasti { get; set; }
