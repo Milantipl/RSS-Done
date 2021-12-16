@@ -1,0 +1,12 @@
+﻿@model ConnectionLibrary.Model.Result
+
+@if (Model.ListDayitvaStar != null)
+{
+    @Html.DropDownListFor(x => Model.RefID, new SelectList(Model.ListDayitvaStar, "RefID", "StarDName"), htmlAttributes: new { @class = "form-control", id = "DDLRefID" })
+}
+else
+{
+    <select class="form-control" id="drpBhag">
+        <option value="0">--Select DayitvaStar---</option>
+    </select>
+}

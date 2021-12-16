@@ -1,0 +1,1264 @@
+﻿@model ConnectionLibrary.Model.Result
+@{
+    ViewBag.Title = "Moto Bhag";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">સ્વયંસેવક યાદી</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Dashboard","Master")">Home</a></li>
+                        <li class="breadcrumb-item active">સ્વયંસેવક યાદી</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <section class="content">
+
+        <div class="container-fluid">
+            <!-- SELECT2 EXAMPLE -->
+
+
+            <div id="Datalist">
+                @Html.Partial("~/Views/Shared/Partial/_ViewMSevaVasti.cshtml", Model)
+            </div>
+            @* <div class="card card-info">
+                    <div class="card-body p-0">
+                        <div id="divListing">
+                            @Html.Partial("~/Views/Shared/Partial/_ViewWrongSevaVasti.cshtml", Model)
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="card card-info">
+                <div class="card-body p-0">
+                    <div id="divListing">
+                        @Html.Partial("~/Views/Shared/Partial/_ViewMsYSevaVasti.cshtml", Model)
+                    </div>
+                </div>
+            </div>
+
+            <form method="post" enctype="multipart/form-data">
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog modal-lg" style="max-width: 950px;">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header py-2">
+                                <h4 class="modal-title">તમારી એક્સેલ ફાઈલ XLSX ફોરમેટ માં હોવી જોઈએ</h4>
+                                <button type="button" class="close" onclick="myFunction()">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <input name="file" class="btn btn-info" id="excel" type="file" required />
+                                    <button class="btn btn-info" id="impbtn" type="submit">Import</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <form id="frmrss">
+                <div class="modal fade" id="myModal1" role="dialog">
+                    <div class="modal-dialog modal-lg" style="max-width: 950px;">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header py-2">
+                                <h4 class="modal-title">Add New Yadi</h4>
+                                <button type="button" id="closeyn" onclick="myFunction()" class="close" @* data-dismiss="modal"*@>&times;</button>
+                            </div>
+
+
+
+                            <div class="modal-body">
+                                <div class="row">
+                                    @*<div class="col-md-6">
+                                        <div class="form-group row">*@
+
+                                    @*<div class="col-sm-8">*@
+                                    <input type="hidden" class="form-control" id="YadiId" name="YadiId" />
+                                    @*</div>
+                                            </div>
+                                        </div>*@
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">નામ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Name" name="Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">પિતાજીનું નામ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="FatherName" name="FatherName" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">અટક : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Surname" name="Surname" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ભાગ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => Model.BhagID, new SelectList(Model.ListBhag, "BhagID", "Bhag"), htmlAttributes: new { @class = "form-control", id = "drpSearchBhag" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">નગર : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => Model.NagarID, new SelectList(Model.ListNagar, "NagarID", "Nagar"), htmlAttributes: new { @class = "form-control", id = "drpSearchNagar" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">મોબાઈલ નંબર : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Mobile" name="Mobile" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ઈ-મેલ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Mail" name="Mail" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">જન્મ તારીખ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control" id="Dob" name="Dob" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">બ્લડ ગ્રુપ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Blood" name="Blood" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">વસ્તી નું નામ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => Model.NvastiID, new SelectList(Model.ListSearchVasti, "VastiID", "Vasti"), htmlAttributes: new { @class = "form-control", id = "drpSearchVasti" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">મિલનનો પ્રકાર : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => Model.MilanType, new SelectList(Model.ListMilanType, "MTID", "MilanType"), htmlAttributes: new { @class = "form-control", id = "drpSearchMilanType" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">શાખા નું નામ: <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => Model.ShakhaID, new SelectList(Model.ListShakha, "ShakhaID", "ShakhaName"), htmlAttributes: new { @class = "form-control", id = "drpSearchShakha" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">કર્મચારી ની માહિતી : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="JobType" name="JobType" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">વ્યવસાય : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Business" name="Business" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ભણતર : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Study" name="Study" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">સંઘ પ્રશિક્ષણ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownList("SanghSikshan", (IEnumerable<SelectListItem>)ViewData["Year"], htmlAttributes: new { @class = "form-control", id = "SanghSikshan" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">વર્તમાન દાયિત્વ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="PresentD" name="PresentD" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">દાયિત્વ પસંદ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="DSelect" name="DSelect" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ગતિવિધિ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Gatividhi" name="Gatividhi" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">પદાધિકારી : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Padadhikari" name="Padadhikari" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ગણવેશ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Uniform" name="Uniform" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ઘોષવાદ્ય : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Vadhya" name="Vadhya" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">સંઘ પ્રવેશ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="SanghPravesh" name="SanghPravesh" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">અભિરુચિ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Abhiruchi" name="Abhiruchi" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">અન્ય સંસ્થા : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="SelectOrganization" name="SelectOrganization" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 text-center">
+                                        <input type="button" id="btnSave" class="btn btn-info" value="Submit">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+            <form id="frmrss2">
+                <div class="modal fade" id="myModal2" role="dialog">
+                    <div class="modal-dialog modal-lg" style="max-width: 950px;">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header py-2">
+                                <h4 class="modal-title">Add New Yadi</h4>
+                                <button type="button" onclick="myFunction()" class="close">&times;</button>
+                            </div>
+
+
+
+                            <div class="modal-body">
+                                <div class="row">
+                                    @*<div class="col-md-6">
+                                        <div class="form-group row">*@
+
+                                    @*<div class="col-sm-8">*@
+                                    <input type="hidden" class="form-control" id="YadiId2" name="YadiId" />
+                                    @*</div>
+                                            </div>
+                                        </div>*@
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">નામ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Name2" name="Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">પિતાજીનું નામ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="FatherName2" name="FatherName" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">અટક : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Surname2" name="Surname" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ભાગ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @*<input type="text" class="form-control" id="BhagID" name="BhagID" />*@
+                                                @Html.DropDownListFor(x => Model.BhagID, new SelectList(Model.ListBhag, "BhagID", "Bhag"), htmlAttributes: new { @class = "form-control", id = "ddlBhaga" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">નગર : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => Model.NagarID, new SelectList(Model.ListNagar, "NagarID", "Nagar"), htmlAttributes: new { @class = "form-control", id = "ddlNagar" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">મોબાઈલ નંબર : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Mobile2" name="Mobile" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ઈ-મેલ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Mail2" name="Mail" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">જન્મ તારીખ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control" id="Dob2" name="Dob" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">બ્લડ ગ્રુપ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Blood2" name="Blood" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">વસ્તી નું નામ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => Model.VastiID, new SelectList(Model.ListSearchVasti, "VastiID", "Vasti"), htmlAttributes: new { @class = "form-control", id = "ddlvasti" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">મિલનનો પ્રકાર : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(x => Model.MilanType, new SelectList(Model.ListMilanType, "MTID", "MilanType"), htmlAttributes: new { @class = "form-control", id = "ddlmilan" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">શાખા નું નામ: <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+
+
+                                                @Html.DropDownListFor(x => Model.ShakhaID, new SelectList(Model.ListShakha, "ShakhaID", "ShakhaName"), htmlAttributes: new { @class = "form-control", id = "ddlShakhaID" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">કર્મચારી ની માહિતી : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="JobType2" name="JobType" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">વ્યવસાય : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Business2" name="Business" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ભણતર : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Study2" name="Study" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">સંઘ પ્રશિક્ષણ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                @*<input type="text" class="form-control" id="SanghSikshan2" name="SanghSikshan" />*@
+                                                @Html.DropDownList("SanghSikshan", (IEnumerable<SelectListItem>)ViewData["Year"], htmlAttributes: new { @class = "form-control", id = "SanghSikshan2" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">વર્તમાન દાયિત્વ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="PresentD2" name="PresentD" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">દાયિત્વ પસંદ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="DSelect2" name="DSelect" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ગતિવિધિ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Gatividhi2" name="Gatividhi" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">પદાધિકારી : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Padadhikari2" name="Padadhikari" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ગણવેશ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Uniform2" name="Uniform" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">ઘોષવાદ્ય : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Vadhya2" name="Vadhya" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">સંઘ પ્રવેશ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="SanghPravesh2" name="SanghPravesh" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">અભિરુચિ : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="Abhiruchi2" name="Abhiruchi" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">અન્ય સંસ્થા : <span style="color: red;">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="SelectOrganization2" name="SelectOrganization" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 text-center">
+                                        <input type="button" id="btnSave2" class="btn btn-info" value="Submit">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+            <!-- /.card -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+</div>
+
+@section scripts
+{
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $VastiSelect;
+            $("a").filter(".nav-link active").removeClass("nav-link active");
+            $("#motobhag1").addClass("nav-link active");
+            $("#Master").addClass("nav-link active");
+            $("li").filter(".nav-item menu-open").removeClass("nav-item menu-open");
+            $("#Masterli").addClass("nav-item menu-open");
+            $VastiSelect = InitSelect2FromRemote("#drpVasti", "/Master/GetVastiDrpList", "Select Vasti", true, 1, 1, false);
+            function InitSelect2FromRemote(element, url, placeholder, multival, minInputLen, maximumSelectionLength, allowTaging) {  // multival = true or false
+                multival = multival || false;
+                return $(element).select2({
+                    tags: allowTaging,
+                    placeholder: placeholder,
+                    minimumInputLength: minInputLen,
+                    maximumSelectionLength: maximumSelectionLength,
+                    multiple: multival,
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            return {
+                                term: params.term
+                            };
+                        },
+                        processResults: function (data) {
+                            return {
+                                results: data,
+                                more: false
+                            };
+                        },
+                        cache: true
+                    },
+                });
+            }
+
+            $('#drpSearchBhag').change(function () {
+                //alert($('#drpSearchBhag option:selected').val());
+                if ($('#drpSearchBhag option:selected').val() != "0") {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Master/Fill_SearchShakhaControl",
+                        data: { BhagID: $('#drpSearchBhag option:selected').val() },
+                        timeout: 600000,
+                        success: function (data) {
+                            //alert(data.Nagar.length);
+                            if (data != null);
+                            {
+                                var markupnagar = "<option value='0'>--Select Nagar--</option>";
+                                if (data.Nagar != null) {
+                                    for (var x = 0; x < data.Nagar.length; x++) {
+                                        markupnagar += "<option value=" + data.Nagar[x].NagarID + ">" + data.Nagar[x].Nagar + "</option>";
+
+                                    }
+                                    $("#drpSearchNagar").html(markupnagar).show();
+                                }
+                                var markupvasti = "<option value='0'>--Select Vasti--</option>";
+                                if (data.Vasti != null) {
+                                    for (var x = 0; x < data.Vasti.length; x++) {
+                                        markupvasti += "<option value=" + data.Vasti[x].VastiID + ">" + data.Vasti[x].Vasti + "</option>";
+
+                                    }
+                                    $("#drpSearchVasti").html(markupvasti).show();
+                                }
+
+                                var markupshakha = "<option value='0'>--Select Shakha--</option>";
+                                if (data.shakha != null) {
+                                    for (var x = 0; x < data.shakha.length; x++) {
+                                        markupshakha += "<option value=" + data.shakha[x].ShakhaID + ">" + data.shakha[x].ShakhaName + "</option>";
+
+                                    }
+                                    $("#drpSearchShakha").html(markupshakha).show();
+                                }
+
+                                var markupshakha = "<option value='0'>--Select Milan--</option>";
+                                if (data.Milan != null) {
+                                    for (var x = 0; x < data.Milan.length; x++) {
+                                        markupshakha += "<option value=" + data.Milan[x].MilanID + ">" + data.Milan[x].MilanName + "</option>";
+
+                                    }
+                                    $("#drpSearchMilan").html(markupshakha).show();
+                                }
+                            }
+
+                        },
+                    });
+
+                }
+            });
+
+        });
+
+        $("#impbtn").click(function () {
+            var TValidate = true;
+            if (TValidate) {
+                if ($("#excel").val() == "") {
+                    toastr.error("Please upload excel file");
+                    $("#excel").focus();
+                    TValidate = false;
+                }
+                else {
+                    toastr.info("Excel File Uploaded Sucessfully");
+                }
+            }
+            if (TValidate) {
+                setInterval('location.reload()', 5000);
+            }
+        });
+
+
+        $("#btnSave").click(function () {
+            var TValidate = true;
+
+            if (TValidate) {
+                if ($("#Name").val() == "") {
+                    toastr.error("Please Enter Name");
+                    $("#Name").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Mobile").val() == "") {
+                    toastr.error("Please Enter Mobile");
+                    $("#Mobile").focus();
+                    TValidate = false;
+                }
+
+            }
+            if (TValidate) {
+                if ($("#Mobile").val().length < 10) {
+                    toastr.error("Please Enter 10 digit MobileNo");
+                    $("#Mobile").focus();
+                    TValidate = false;
+                }
+
+            }
+            if (TValidate) {
+                if ($("#Mobile").val().length > 10) {
+                    toastr.error("Please Enter 10 digit MobileNo");
+                    $("#Mobile").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#FatherName").val() == "") {
+                    toastr.error("Please Enter FatherName");
+                    $("#FatherName").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Surname").val() == "") {
+                    toastr.error("Please Enter Surname");
+                    $("#Surname").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#drpSearchBhag").val() == "0") {
+                    toastr.error("Please Enter Bhag");
+                    $("#drpSearchBhag").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#drpSearchNagar").val() == "0") {
+                    toastr.error("Please Enter Nagar");
+                    $("#drpSearchNagar").focus();
+                    TValidate = false;
+                }
+            }
+
+            //if (TValidate) {
+
+            //    if ($("#Mobile").val() == "") {
+            //        toastr.error("Please Enter Mobile");
+            //        $("#Mobile").focus();
+            //        TValidate = false;
+            //    }
+
+            //var mob = /^[1-9]{1}[0-9]{9}$/;
+            //if (mob.test($.trim($("#<%=txtMob.Mobile %>").val())) == false) {
+            //    alert("Please enter valid mobile number.");
+            //    $("#<%=txtMob.Mobile %>").focus();
+            //    return false;
+            //}
+
+            // }
+
+            if (TValidate) {
+                if ($("#Mail").val() == "") {
+                    toastr.error("Please Enter Mail");
+                    $("#Mail").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Dob").val() == "") {
+                    toastr.error("Please Enter Dob");
+                    $("#Dob").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Blood").val() == "") {
+                    toastr.error("Please Enter Blood Group");
+                    $("#Blood").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#drpSearchVasti").val() == "0") {
+                    toastr.error("Please Enter Vasti Name");
+                    $("#drpSearchVasti").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#drpSearchMilanType").val() == "0") {
+                    toastr.error("Please Enter Milan Type");
+                    $("#drpSearchMilanType").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#drpSearchShakha").val() == "0") {
+                    toastr.error("Please Enter Shakha Name");
+                    $("#drpSearchShakha").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#JobType").val() == "") {
+                    toastr.error("કર્મચારી ની માહિતી ભરો");
+                    $("#JobType").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Business").val() == "") {
+                    toastr.error("Please Enter The Business Name");
+                    $("#Business").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Study").val() == "") {
+                    toastr.error("Please Enter The Study Information");
+                    $("#Study").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#SanghSikshan").val() == "") {
+                    toastr.error("Please Enter The SanghSikshan");
+                    $("#SanghSikshan").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#PresentD").val() == "") {
+                    toastr.error("વર્તમાન દાયિત્વ");
+                    $("#PresentD").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#DSelect").val() == "") {
+                    toastr.error("દાયિત્વ પસંદ");
+                    $("#DSelect").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Gatividhi").val() == "") {
+                    toastr.error("ગતિવિધિ");
+                    $("#Gatividhi").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Padadhikari").val() == "") {
+                    toastr.error("પદાધિકારી");
+                    $("#Padadhikari").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Uniform").val() == "") {
+                    toastr.error("ગણવેશ");
+                    $("#Uniform").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Vadhya").val() == "") {
+                    toastr.error("ઘોષવાદ્ય");
+                    $("#Vadhya").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#SanghPravesh").val() == "") {
+                    toastr.error("સંઘ પ્રવેશ");
+                    $("#SanghPravesh").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Abhiruchi").val() == "") {
+                    toastr.error("અભિરુચિ");
+                    $("#Abhiruchi").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#SelectOrganization").val() == "") {
+                    toastr.error("અન્ય સંસ્થા");
+                    $("#SelectOrganization").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Master/InsertYadiData",
+                    data: $("#frmrss").serialize(),
+                    timeout: 600000,
+                    complete: function () {
+                        $("#btnSave").click(function () {
+                            location.reload();
+
+                        });
+                    },
+                });
+            }
+
+            if (TValidate) {
+                location.reload();
+                toastr.info("Data Saved Succesfully");
+            }
+
+            return TValidate;
+        });
+
+
+        function myFunction() {
+            var txt;
+            var xyz;
+            var btx;
+            var r = confirm("Are You Sure You Want To close");
+            if (r == true) {
+                txt = $("#myModal1").modal('hide');
+                xyz = $("#myModal2").modal('hide');
+                btx = $("#myModal").modal('hide');
+
+            }
+        }
+
+        $("#myModal1").keyup(function (event) {
+            if (event.keyCode == 27) {
+                $("#myModal1").modal('hide');
+            }
+        });
+
+
+        $("#btnSave2").click(function () {
+            // alert($('#drpNagar option:selected').val());
+
+            var TValidate = true;
+
+            if (TValidate) {
+                if ($("#Name2").val() == "") {
+                    toastr.error("Please Enter Name");
+                    $("#Name2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#FatherName2").val() == "") {
+                    toastr.error("Please Enter FatherName");
+                    $("#FatherName2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Surname2").val() == "") {
+                    toastr.error("Please Enter Surname");
+                    $("#Surname2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#ddlBhaga").val() == "0") {
+                    toastr.error("Please Enter Bhag");
+                    $("#ddlBhaga").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#ddlNagar").val() == "0") {
+                    toastr.error("Please Enter Nagar");
+                    $("#ddlNagar").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Mobile2").val() == "") {
+                    toastr.error("Please Enter Mobile");
+                    $("#Mobile2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Mail2").val() == "") {
+                    toastr.error("Please Enter Mail");
+                    $("#Mail2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Dob2").val() == "") {
+                    toastr.error("Please Enter Dob");
+                    $("#Dob2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Blood2").val() == "") {
+                    toastr.error("Please Enter Blood Group");
+                    $("#Blood2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#ddlvasti").val() == "0") {
+                    toastr.error("Please Enter Vasti Name");
+                    $("#ddlvasti").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#ddlmilan").val() == "0") {
+                    toastr.error("Please Enter Milan Type");
+                    $("#ddlmilan").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#ddlShakhaID").val() == "0") {
+                    toastr.error("Please Enter Shakha Name");
+                    $("#ddlShakhaID").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#JobType2").val() == "") {
+                    toastr.error("કર્મચારી ની માહિતી ભરો");
+                    $("#JobType2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Business2").val() == "") {
+                    toastr.error("Please Enter The Business Name");
+                    $("#Business2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Study2").val() == "") {
+                    toastr.error("Please Enter The Study Information");
+                    $("#Study2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#SanghSikshan2").val() == "") {
+                    toastr.error("Please Enter The SanghSikshan");
+                    $("#SanghSikshan2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#PresentD2").val() == "") {
+                    toastr.error("વર્તમાન દાયિત્વ");
+                    $("#PresentD2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#DSelect2").val() == "") {
+                    toastr.error("દાયિત્વ પસંદ");
+                    $("#DSelect2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Gatividhi2").val() == "") {
+                    toastr.error("ગતિવિધિ");
+                    $("#Gatividhi2").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            if (TValidate) {
+                if ($("#Padadhikari2").val() == "") {
+                    toastr.error("પદાધિકારી");
+                    $("#Padadhikari2").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Uniform2").val() == "") {
+                    toastr.error("ગણવેશ");
+                    $("#Uniform2").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Vadhya2").val() == "") {
+                    toastr.error("ઘોષવાદ્ય");
+                    $("#Vadhya2").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#SanghPravesh2").val() == "") {
+                    toastr.error("સંઘ પ્રવેશ");
+                    $("#SanghPravesh2").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#Abhiruchi2").val() == "") {
+                    toastr.error("અભિરુચિ");
+                    $("#Abhiruchi").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+                if ($("#SelectOrganization2").val() == "") {
+                    toastr.error("અન્ય સંસ્થા");
+                    $("#SelectOrganization2").focus();
+                    TValidate = false;
+                }
+            }
+
+            if (TValidate) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Master/InsertYadiData",
+                    data: $("#frmrss2").serialize(),
+                    timeout: 600000,
+
+                });
+            }
+            if (TValidate) {
+                location.reload();
+                toastr.info("Data Saved Succesfully");
+            }
+
+            return TValidate;
+        });
+
+        function Update(YadiId, Name, FatherName, Surname, BhagID, NagarID, Mobile, Mail, Dob, Blood, NvastiID,
+            MTID, ShakhaID, JobType, Business, Study, SanghSikshan, PresentD, DSelect, Gatividhi,
+            Padadhikari, Uniform, Vadhya, SanghPravesh, Abhiruchi, SelectOrganization) {
+            //alert(MTID);
+            $("#YadiId2").val(YadiId);
+            $("#Name2").val(Name);
+            $("#FatherName2").val(FatherName);
+            $("#Surname2").val(Surname);
+            $("#ddlBhaga").val(BhagID);
+            $("#ddlNagar").val(NagarID);
+            $("#Mobile2").val(Mobile);
+            $("#Mail2").val(Mail);
+            $("#Dob2").val(Dob);
+            $("#Blood2").val(Blood);
+            $("#ddlvasti").val(NvastiID);
+            $("#ddlmilan").val(MTID);
+            $("#ddlShakhaID").val(ShakhaID);
+            $("#JobType2").val(JobType);
+            $("#Business2").val(Business);
+            $("#Study2").val(Study);
+            $("#SanghSikshan2").val(SanghSikshan);
+            $("#PresentD2").val(PresentD);
+            $("#DSelect2").val(DSelect);
+            $("#Gatividhi2").val(Gatividhi);
+            $("#Padadhikari2").val(Padadhikari);
+            $("#Uniform2").val(Uniform);
+            $("#Vadhya2").val(Vadhya);
+            $("#SanghPravesh2").val(SanghPravesh);
+            $("#Abhiruchi2").val(Abhiruchi);
+            $("#SelectOrganization2").val(SelectOrganization);
+
+        }
+
+
+
+    </script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+
+}
+@*</form>*@

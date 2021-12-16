@@ -1,0 +1,32 @@
+﻿@model ConnectionLibrary.Model.Result
+
+<div class="card card-info">
+    <input type="hidden" id="hdntotal" name="Total" value="@Model.Total" />
+
+    <div class="card-header">
+        <h3 class="card-title">
+            જુથ મા યાદી હોય તો અહિયા અપલોડ કરો
+        </h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-5">
+                <p class="mt-2">એક્સેલ ફોરમેટ આ મુજબ રાખવો અને અહિયાંથી ડાઉનલોડ કરો</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <a href="~/ExcelData/Sample/Demo-Excel.xls" download>
+                    <img src="~/Content/dist/img/excel.jpg" id="exdwl" width="50" />
+                </a>
+            </div>
+
+            <div class="col-md-4 text-right">
+                <a class="btn btn-primary mb-1" data-toggle="modal" data-target="#myModal" onclick="javascript:Clear();">ADD EXCEL DATA</a>
+                <a class="btn btn-primary mb-1" data-toggle="modal" data-target="#myModal1" onclick="javascript:Clear();">ADD New Yadi</a>
+            </div>
+        </div>
+    </div>
+</div>

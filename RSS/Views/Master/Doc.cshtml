@@ -1,0 +1,818 @@
+﻿@model ConnectionLibrary.Model.Result
+
+@{
+    ViewBag.Title = "upload";
+}
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg" style="max-width: 950px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header py-2">
+                <h4 class="modal-title">Add New Seva Vasti</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <!--<div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label for="inputEmail3" class="col-sm-4 text-right col-form-label">સેવા વસ્તી નું નામ: <span style="color: red;">*</span></label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" name="SevaVasti" id="txtSevavasti" />
+                                                        <input type="hidden" id="hdnSVID" name="SVID">
+                                                        <input type="hidden" id="hdnp" name="p">
+                                                        <input type="hidden" id="hdnNagarID" name="NagarID">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <!--<div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-4 text-right col-form-label">વસ્તી: <span style="color: red;">*</span></label>
+                    <div class="col-sm-8">-->
+                    <!--@* <select class="form-control" data-allow-clear="true" id="drpVasti" name="VastiID">
+                    </select>*@-->
+                    @*<div id="Droplist">
+
+                            @Html.Partial("~/Views/Shared/Partial/_DDLVasti.cshtml", Model)
+                        </div>*@
+                </div>
+            </div>
+            <!--</div>-->
+            @using (Html.BeginForm("InsertDoc", "Master", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+
+            {
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-4 text-right col-form-label">Description: </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="description" id="txtNagar" minlength="3" maxlength="50" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-4 text-right col-form-label">Doc:</label>
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control" name="doc" id="doc" multiple="" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-4 text-right col-form-label">Note:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="note" id="txtDes" minlength="3" maxlength="50" />
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="col-md-6">
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">Note:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="userid" id="txtuid" />
+                            </div>
+                        </div>
+                    </div>*@
+                @*<div class="col-md-6">
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">શાખા: </label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(x => Model.ShakhaID, new SelectList(Model.ListShakha, "ShakhaID", "ShakhaName"), htmlAttributes: new { @class = "form-control", id = "drpShakha" })
+                            </div>
+                        </div>
+                    </div>*@
+                @*<div class="col-md-6">
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 text-right col-form-label">સ્થાયી સેવા કાર્ય: </label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(x => Model.SKID, new SelectList(Model.ListSevaKary, "SKID", "SevaKary"), htmlAttributes: new { @class = "form-control", id = "drpSevakary" })
+                            </div>
+                        </div>
+                    </div>*@
+
+
+                <div class="col-md-12 text-center">
+                    <input type="submit" id="btnSave" class="btn btn-info" value="Submit">
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<section class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Upload Doc</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Dashboard","Master")">Home</a></li>
+                        <li class="breadcrumb-item active">Upload Doc</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    @using (Html.BeginForm("DocChild", "Master", FormMethod.Get, new { @enctype = "multipart/form-data" }))
+
+    {
+        <section class="content">
+            <form id="frmrss">
+                <div class="container-fluid">
+                    @*Parent View Start*@
+                    @Html.Partial("~/Views/Shared/Partial/_ViewParent.cshtml", Model)
+                </div>
+
+                <div class="modal fade" id="Datalist" role="dialog">
+                    <div class="modal-dialog modal-lg" style="max-width: 950px;">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header py-2">
+                                <h4 class="modal-title">View Data</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                @Html.Partial("~/Views/Shared/Partial/_viewChild.cshtml", Model)
+                                <p>Image</p>
+                                <p id="rData">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*Parent View End*@
+                @*<div class="modal fade" id="Display" role="dialog">
+                        <div class="modal-dialog modal-lg" style="max-width: 950px;">
+                            <div class="modal-content">
+                                <div class="modal-header py-2">
+                                    <h4 class="modal-title">Document</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                @Html.Partial("~/Views/Shared/Partial/_viewChild.cshtml", Model)
+                            </div>
+                        </div>
+                    </div>*@
+
+            </form>
+        </section>
+    }
+</section>
+
+    }
+
+@section scripts
+{
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $('#sortTable').DataTable();
+    </script>
+    <script type="text/javascript">
+
+        $('#btnGet').click(function () {
+            alert("hello");
+
+        })
+
+        function GetRecord(p) {
+            alert('hi');
+            $("#btnGet").val(p);
+            $.ajax({
+                type: "GET",
+                url: "/Master/DocChild",
+                data: $("#frmrss").serialize(),
+                timeout: 600000,
+                beforeSend: function () {
+                    $('#milan').css("display", 'block');
+                },
+                success: function (data) {
+                    if (data == "-1") {
+                        window.location.href = "/account/logoff";
+                    }
+                    else if (data == "0") {
+                        toastr.error("No Records Found");
+                    }
+                    else {
+                        alert(data);
+                        $("#Datalist").html(data);
+                    }
+                },
+                complete: function () {
+                    $('#milan').css("display", 'none');
+                },
+            });
+        }
+
+
+    </script>
+    <script type="text/javascript">
+
+
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+
+        $(document).ready(function () {
+            var $VastiSelect;
+            $VastiSelect = InitSelect2FromRemote("#drpVasti", "/Master/GetVastiDrpList", "Select Vasti", true, 1, 1, false);
+            function InitSelect2FromRemote(element, url, placeholder, multival, minInputLen, maximumSelectionLength, allowTaging) {  // multival = true or false
+                multival = multival || false;
+                return $(element).select2({
+                    tags: allowTaging,
+                    placeholder: placeholder,
+                    minimumInputLength: minInputLen,
+                    maximumSelectionLength: maximumSelectionLength,
+                    multiple: multival,
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            return {
+                                term: params.term
+                            };
+                        },
+                        processResults: function (data) {
+                            return {
+                                results: data,
+                                more: false
+                            };
+                        },
+                        cache: true
+                    },
+                });
+            }
+            $("a").filter(".nav-link active").removeClass("nav-link active");
+            $("#uploaddoc").addClass("nav-link active");
+            $("#Master").addClass("nav-link active");
+            $("li").filter(".nav-item menu-open").removeClass("nav-item menu-open");
+            $("#Masterli").addClass("nav-item menu-open");
+
+            $('#drpSearchBhag').change(function () {
+                //alert($('#drpSearchBhag option:selected').val());
+                if ($('#drpSearchBhag option:selected').val() != "0") {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Master/Fill_SearchShakhaControl",
+                        data: { BhagID: $('#drpSearchBhag option:selected').val() },
+                        timeout: 600000,
+                        success: function (data) {
+                            //alert(data.Nagar.length);
+                            if (data != null);
+                            {
+                                var markupnagar = "<option value='0'>--Select Nagar--</option>";
+                                if (data.Nagar != null) {
+                                    for (var x = 0; x < data.Nagar.length; x++) {
+                                        markupnagar += "<option value=" + data.Nagar[x].NagarID + ">" + data.Nagar[x].Nagar + "</option>";
+
+                                    }
+                                    $("#drpSearchNagar").html(markupnagar).show();
+                                }
+                                var markupvasti = "<option value='0'>--Select Vasti--</option>";
+                                if (data.Vasti != null) {
+                                    for (var x = 0; x < data.Vasti.length; x++) {
+                                        markupvasti += "<option value=" + data.Vasti[x].VastiID + ">" + data.Vasti[x].Vasti + "</option>";
+
+                                    }
+                                    $("#drpSearchVasti").html(markupvasti).show();
+                                }
+
+                                var markupshakha = "<option value='0'>--Select Shakha--</option>";
+                                if (data.shakha != null) {
+                                    for (var x = 0; x < data.shakha.length; x++) {
+                                        markupshakha += "<option value=" + data.shakha[x].ShakhaID + ">" + data.shakha[x].ShakhaName + "</option>";
+
+                                    }
+                                    $("#drpSearchShakha").html(markupshakha).show();
+                                }
+                            }
+
+                        },
+                    });
+
+                }
+            });
+
+        });
+        //$('#drpVasti').change(function () {
+        //   // alert('hi');
+        //    if ($('#drpVasti option:selected').val() != " ") {
+        //        $.ajax({
+        //            type: "GET",
+        //            url: "/Master/Fill_AddShakhaDetail",
+        //            data: { VastiID: $('#drpVasti option:selected').val() },
+        //            timeout: 600000,
+        //            success: function (data) {
+        //                // alert(data.Nagar);
+        //                if (data != null);
+        //                {
+        //                    var markup = "";
+        //                    $("#drpSevavasti").html(markup).show();
+        //                    $("#txtNagar").val(data.Nagar);
+
+        //                    $("#txtBhag").val(data.Bhag);
+        //                    markup = "<option value='0'>--Select Sevavasti--</option>";
+        //                    if (data.SevavastiList != "") {
+        //                        for (var x = 0; x < data.SevavastiList.length; x++) {
+        //                            markup += "<option value=" + data.SevavastiList[x].SVID + ">" + data.SevavastiList[x].SevaVasti + "</option>";
+        //                        }
+
+        //                    }
+
+        //                    $("#drpSevavasti").html(markup).show();
+        //                }
+
+        //            },
+        //        });
+
+        //    }
+        //});
+        $("#btnSave").click(function () {
+            // alert($('#drpNagar option:selected').val());
+            var TValidate = true;
+            if (TValidate) {
+                if ($("#txtNagar").val() == "") {
+                    toastr.error("Please Enter Description");
+                    $("#txtNagar").focus();
+                    TValidate = false;
+
+                }
+
+            }
+
+
+            if (TValidate) {
+                if ($("#doc").val() == "") {
+                    toastr.error("Please Choose Document");
+                    $("#doc").focus();
+                    TValidate = false;
+                }
+
+            }
+            if (TValidate) {
+                if ($("#txtDes").val() == "") {
+                    toastr.error("Please Enter Note");
+                    $("#txtDes").focus();
+                    TValidate = false;
+                }
+
+            }
+            if (TValidate) {
+                if ($("#drpSevaUP").val() == "0") {
+                    toastr.error("Please Select SevaUP");
+                    $("#drpSevaUP").focus();
+                    TValidate = false;
+                }
+
+            }
+            if (TValidate) {
+                if ($("#drpPalak").val() == "0") {
+                    toastr.error("Please Select Palak");
+                    $("#drpPalak").focus();
+                    TValidate = false;
+                }
+
+            }
+            if (TValidate) {
+                if ($("#drpToli").val() == "0") {
+                    toastr.error("Please Select Toli");
+                    $("#drpToli").focus();
+                    TValidate = false;
+                }
+
+            }
+
+            //drpSevaUP
+            if (TValidate) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Master/InsertDoc",
+                    data: $("#frmrss").serialize(),
+                    timeout: 600000,
+                    beforeSend: function () {
+                        $('#milan').css("display", 'block');
+                    },
+                    success: function (data) {
+
+                        if (data == "-1") {
+                            window.location.href = "/account/logoff";
+                        }
+                        else if (data == "0") {
+                            toastr.error("No Records Found");
+                        }
+                        else {
+
+                            $("#Datalist").html(data);
+                            //$("#myModal").css("display", "none");
+                            toastr.info("Record Save Successfully!!");
+                            Clear();
+                            $.ajax({
+                                type: "GET",
+                                url: "/Master/ClearVastiVast",
+
+                                timeout: 600000,
+                                success: function (data) {
+
+                                    if (data == "0") {
+
+                                        toastr.error("Record Not Found!! ");
+
+                                    }
+                                    else {
+                                        $("#Droplist").html(data);
+                                        var $VastiSelect;
+                                        $VastiSelect = InitSelect2FromRemote("#drpVasti", "/Master/GetVastiDrpList", "Select Vasti", true, 1, 1, false);
+                                        function InitSelect2FromRemote(element, url, placeholder, multival, minInputLen, maximumSelectionLength, allowTaging) {  // multival = true or false
+                                            multival = multival || false;
+                                            return $(element).select2({
+                                                tags: allowTaging,
+                                                placeholder: placeholder,
+                                                minimumInputLength: minInputLen,
+                                                maximumSelectionLength: maximumSelectionLength,
+                                                multiple: multival,
+                                                ajax: {
+                                                    url: url,
+                                                    dataType: 'json',
+                                                    data: function (params) {
+                                                        return {
+                                                            term: params.term
+                                                        };
+                                                    },
+                                                    processResults: function (data) {
+                                                        return {
+                                                            results: data,
+                                                            more: false
+                                                        };
+                                                    },
+                                                    cache: true
+                                                },
+                                            });
+                                        }
+
+                                    }
+
+                                },
+                            });
+                        }
+                    },
+                    complete: function () {
+                        $('#milan').css("display", 'none');
+                    },
+                });
+            }
+
+            return TValidate;
+        });
+        function Update(ShakhaID, ShakhaName, VastiID, Nagar, Bhag, STID, Toli, Palak, AssignSVID, SevaUP, ShakhaTime, Time) {
+            // alert(VastiID);
+
+            $("#hdnvid").val(VastiID);
+            $("#hdnShakhaID").val(ShakhaID);
+            $("#txtShakha").val(ShakhaName);
+            $("#txtNagar").val(Nagar);
+            $("#txtBhag").val(Bhag);
+            $("#txtTime").val(Time);
+            $("#drpShakhaTime").val(ShakhaTime);
+            //$("#drpVasti").select2().val(VastiID).trigger('change.select2');
+            //$('#drpVasti').val(VastiID);
+            //$VastiSelect.val(VastiID).trigger("change");
+
+            $("#drpShakhaType").val(STID);
+
+            $("#drpToli").val(Toli)
+            $("#drpPalak").val(Palak);
+            $("#drpSevaUP").val(SevaUP);
+
+            $.ajax({
+                type: "GET",
+                url: "/Master/Fill_AddShakhaDetail",
+                data: { VastiID: VastiID },
+                timeout: 600000,
+                success: function (data) {
+                    // alert(data.Nagar);
+                    if (data != null);
+                    {
+                        var markup = "";
+                        $("#drpSevavasti").html(markup).show();
+                        $("#txtNagar").val(data.Nagar);
+
+                        $("#txtBhag").val(data.Bhag);
+                        markup = "<option value='0'>--Select Sevavasti--</option>";
+                        if (data.SevavastiList != "") {
+                            for (var x = 0; x < data.SevavastiList.length; x++) {
+                                if (data.SevavastiList[x].SVID.toString() === AssignSVID.toString()) {
+                                    // alert(ShakhaID + 'if' + data.ShakhaList[x].ShakhaID.toString());
+                                    markup += "<option value=" + data.SevavastiList[x].SVID + " selected='selected'>" + data.SevavastiList[x].SevaVasti + "</option>";
+                                }
+                                else {
+                                    markup += "<option value=" + data.SevavastiList[x].SVID + ">" + data.SevavastiList[x].SevaVasti + "</option>";
+                                }
+                            }
+
+                        }
+
+                        $("#drpSevavasti").html(markup).show();
+
+                    }
+
+                },
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "/Master/VastByID",
+                data: { VastiID: VastiID },
+                timeout: 600000,
+                success: function (data) {
+
+                    if (data == "0") {
+
+                        toastr.error("Record Not Found!! ");
+
+                    }
+                    else {
+                        $("#Droplist").html(data);
+                        var $VastiSelect;
+                        $VastiSelect = InitSelect2FromRemote("#drpVasti", "/Master/GetVastiDrpList", "Select Vasti", true, 1, 1, false);
+                        function InitSelect2FromRemote(element, url, placeholder, multival, minInputLen, maximumSelectionLength, allowTaging) {  // multival = true or false
+                            multival = multival || false;
+                            return $(element).select2({
+                                tags: allowTaging,
+                                placeholder: placeholder,
+                                minimumInputLength: minInputLen,
+                                maximumSelectionLength: maximumSelectionLength,
+                                multiple: multival,
+                                ajax: {
+                                    url: url,
+                                    dataType: 'json',
+                                    data: function (params) {
+                                        return {
+                                            term: params.term
+                                        };
+                                    },
+                                    processResults: function (data) {
+                                        return {
+                                            results: data,
+                                            more: false
+                                        };
+                                    },
+                                    cache: true
+                                },
+                            });
+                        }
+
+                    }
+
+                }
+            });
+            // $("#drpSevavasti").val(AssignSVID);
+        }
+        //function Clear() {
+        //    $("#txtShakha").val('');
+        //    $("#txtNagar").val('');
+        //    $("#txtBhag").val('');
+        //    $("#drpVasti").val(' ');
+        //    $("#drpShakhaType").val('0');
+        //    $("#drpToli").val('0');
+        //    $("#drpPalak").val('0');
+        //    $("#drpSevaUP").val('0');
+        //    $("#hdnShakhaID").val('');
+        //    $("#txtTime").val('');
+        //    $("#drpShakhaTime").val(0);
+        //    $.ajax({
+        //        type: "GET",
+        //        url: "/Master/ClearVastiVast",
+
+        //        timeout: 600000,
+        //        success: function (data) {
+
+        //            if (data == "0") {
+
+        //                toastr.error("Record Not Found!! ");
+
+        //            }
+        //            else {
+        //                $("#Droplist").html(data);
+        //                var $VastiSelect;
+        //                $VastiSelect = InitSelect2FromRemote("#drpVasti", "/Master/GetVastiDrpList", "Select Vasti", true, 1, 1, false);
+        //                function InitSelect2FromRemote(element, url, placeholder, multival, minInputLen, maximumSelectionLength, allowTaging) {  // multival = true or false
+        //                    multival = multival || false;
+        //                    return $(element).select2({
+        //                        tags: allowTaging,
+        //                        placeholder: placeholder,
+        //                        minimumInputLength: minInputLen,
+        //                        maximumSelectionLength: maximumSelectionLength,
+        //                        multiple: multival,
+        //                        ajax: {
+        //                            url: url,
+        //                            dataType: 'json',
+        //                            data: function (params) {
+        //                                return {
+        //                                    term: params.term
+        //                                };
+        //                            },
+        //                            processResults: function (data) {
+        //                                return {
+        //                                    results: data,
+        //                                    more: false
+        //                                };
+        //                            },
+        //                            cache: true
+        //                        },
+        //                    });
+        //                }
+
+        //            }
+
+        //        },
+        //    });
+
+        //}
+        function Delete(ShakhaID) {
+            //alert('hi');
+            $.ajax({
+                type: "GET",
+                url: "/Master/DeleteShakha/",
+                data: { ShakhaID: ShakhaID },
+                timeout: 600000,
+                beforeSend: function () {
+                    $('#milan').css("display", 'block');
+                },
+                success: function (data) {
+                    if (data == "-1") {
+                        window.location.href = "/account/logoff";
+                    }
+                    else if (data == "0") {
+                        toastr.error("No Records Found");
+                    }
+                    else {
+                        $("#Datalist").html(data);
+                        toastr.info("Record Deleted Sucessfully!!")
+                    }
+
+                },
+                complete: function () {
+                    $('#milan').css("display", 'none');
+                },
+            });
+        }
+
+
+        $("#btnSearch").click(function () {
+            // alert($('#drpNagar option:selected').val());
+            $("#hdnp").val(0);
+            var TValidate = true;
+            if (TValidate) {
+                if ($("#drpSearchBhag").val() == "0") {
+                    toastr.error("Please Select Bhag");
+                    $("#drpSearchBhag").focus();
+                    TValidate = false;
+                }
+
+            }
+            if (TValidate) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Master/SearchShakha",
+                    data: $("#frmrss").serialize(),
+                    timeout: 600000,
+                    beforeSend: function () {
+                        $('#milan').css("display", 'block');
+                    },
+                    success: function (data) {
+                        if (data == "-1") {
+                            window.location.href = "/account/logoff";
+                        }
+
+                        else {
+                            $("#Datalist").html(data);
+                            if ($("#hdntotal").val() == "0") {
+                                toastr.error("No Record Found !!");
+                            }
+                        }
+                    },
+                    complete: function () {
+                        $('#milan').css("display", 'none');
+                    },
+                });
+            }
+
+            return TValidate;
+        });
+
+        function GetRecords(p) {
+            // alert('hi');
+            $("#hdnp").val(p);
+            $.ajax({
+                type: "GET",
+                url: "/Master/SearchShakha",
+                data: $("#frmrss").serialize(),
+                timeout: 600000,
+                beforeSend: function () {
+                    $('#milan').css("display", 'block');
+                },
+                success: function (data) {
+                    if (data == "-1") {
+                        window.location.href = "/account/logoff";
+                    }
+                    else if (data == "0") {
+                        toastr.error("No Records Found");
+                    }
+                    else {
+                        $("#Datalist").html(data);
+                    }
+                },
+                complete: function () {
+                    $('#milan').css("display", 'none');
+                },
+            });
+        }
+
+
+
+        function Binddata(ddlvasti) {
+
+
+            var selectedText = ddlvasti.options[ddlvasti.selectedIndex].innerHTML;
+            var selectedValue = ddlvasti.value;
+
+            // alert("Selected Text: " + selectedText + " Value: " + selectedValue);
+
+
+
+            if (selectedValue != " ") {
+                $.ajax({
+                    type: "GET",
+                    url: "/Master/Fill_AddShakhaDetail",
+                    data: { VastiID: selectedValue },
+                    timeout: 600000,
+                    success: function (data) {
+                        // alert(data.Nagar);
+                        if (data != null);
+                        {
+                            var markup = "";
+                            $("#drpSevavasti").html(markup).show();
+                            $("#txtNagar").val(data.Nagar);
+
+                            $("#txtBhag").val(data.Bhag);
+                            markup = "<option value='0'>--Select Sevavasti--</option>";
+                            if (data.SevavastiList != "") {
+                                for (var x = 0; x < data.SevavastiList.length; x++) {
+                                    markup += "<option value=" + data.SevavastiList[x].SVID + ">" + data.SevavastiList[x].SevaVasti + "</option>";
+                                }
+
+                            }
+
+                            $("#drpSevavasti").html(markup).show();
+                        }
+
+                    },
+                });
+
+            }
+
+        }
+
+
+
+    </script>
+    <script>
+        function togglesDiv(mydivid) {
+            var catdiv = document.getElementById(mydivid);
+            if (catdiv.style.display == "block") {
+                catdiv.style.display = "none";
+
+            } else {
+                catdiv.style.display = "block";
+
+            }
+        }
+    </script>
+}
+

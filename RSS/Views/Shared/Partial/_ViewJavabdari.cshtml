@@ -1,0 +1,50 @@
+﻿@model ConnectionLibrary.Model.Result
+<div class="card card-info">
+    <div class="card-header">
+        @if (Model.ViewJavabdari != null)
+        {
+            <h3 class="card-title">Javabdari (Total: @Model.ViewJavabdari.Count)</h3>
+        }
+        else
+        {
+    <h3 class="card-title">Javabdari</h3>
+        }
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    
+        <table class="card-body table table-bordered">
+            <thead class="m-head">
+                <tr>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>Mail</th>
+                    <th>Star</th>
+                    <th>Dayitva</th>
+                    <th>PravasiStar</th>
+                    <th style="width:40%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ViewJavabdari != null)
+                {
+                    foreach (var item in Model.ViewJavabdari)
+                    {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Mobile</td>
+                    <td>@item.Mail</td>
+                    <td>@item.Star</td>
+                    <td>@item.Dayitva</td>
+                    <td>@item.PravasiStar</td>
+
+                </tr>
+                                            
+                    }
+                }
+            </tbody>
+        </table>
+    
+</div>

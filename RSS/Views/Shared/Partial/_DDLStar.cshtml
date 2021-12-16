@@ -1,0 +1,28 @@
+﻿@model ConnectionLibrary.Model.Result
+
+@if (Model.ListVibhag != null)
+{
+    @Html.DropDownListFor(x => Model.RefID, new SelectList(Model.ListVibhag, "VibhagID", "Vibhag"), htmlAttributes: new { @class = "form-control", id = "drpviBhag" })
+}
+
+else if (Model.ListBhag != null)
+{
+    @Html.DropDownListFor(x => Model.RefID, new SelectList(Model.ListBhag, "BhagID", "Bhag"), htmlAttributes: new { @class = "form-control", id = "drpviBhag" })
+}
+
+else if (Model.ListNagar != null)
+{
+    @Html.DropDownListFor(x => Model.RefID, new SelectList(Model.ListNagar, "NagarID", "Nagar"), htmlAttributes: new { @class = "form-control", id = "drpviBhag" })
+}
+
+else if (Model.ListPrant != null)
+{
+    @Html.DropDownListFor(x => Model.RefID, new SelectList(Model.ListPrant, "PrantID", "PrantName"), htmlAttributes: new { @class = "form-control", id = "drpviBhag" })
+}
+
+else
+{
+    <select class="form-control" id="drpBhag">
+        <option value="0">--Select DayitvaStar---</option>
+    </select>
+}

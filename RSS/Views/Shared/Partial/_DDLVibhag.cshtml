@@ -1,0 +1,48 @@
+﻿@model ConnectionLibrary.Model.Result
+
+@if (Model.ListBhag != null)
+{
+
+    @Html.DropDownListFor(x => Model.BhagID, new SelectList(Model.ListBhag, "BhagID", "Bhag"), htmlAttributes: new { @class = "form-control", id = "drpBhag" })
+
+}
+else
+{
+    <select class="form-control" id="drpBhag">
+        <option value="0">--Select Bhag---</option>
+        @*  *@
+    </select>
+}
+
+
+<script>
+    $('#drpBhag').change(function () {
+      
+        if ($('#drpBhag option:selected').val() != "0") {
+            $.ajax({
+                type: "GET",
+                url: "/Master/NagarByViBhagID",
+                data: { BhagID: $('#drpBhag option:selected').val() },
+                timeout: 600000,
+                success: function (data) {
+
+                    if (data == "-1") {
+                        window.location.href = "/account/logoff";
+                    }
+                    else if (data == "0") {
+
+                        toastr.error("Record Not Found!! ");
+
+                    }
+                    else {
+                        $("#Droplistnagar").html(data);
+
+                    }
+
+                },
+            });
+        }
+    });
+
+    
+</script>

@@ -1,0 +1,454 @@
+﻿@model ConnectionLibrary.Model.Result
+@{
+    ViewBag.Title = "Pravasi Yadi";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">પ્રવાસી કાર્યકર્તા</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Dashboard","Master")">Home</a></li>
+                        <li class="breadcrumb-item active">પ્રવાસી કાર્યકર્તા</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+
+    <form id="frmrss2" method="post" enctype="multipart/form-data">
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog modal-lg" style="max-width: 950px;">
+                <div class="modal-content">
+                    <div class="modal-header py-2">
+                        <h4 class="modal-title">જવાબદારી માં સુધારો કરો</h4>
+                        <button type="button" onclick="myFunction()" class="close">&times;</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 text-right col-form-label">NAME : <span style="color: red;">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="hidden" id="YadiID" name="YadiID">
+                                        <input type="hidden" id="PravasiID" name="PravasiID">
+                                        <input type="text" class="form-control" id="Name" name="Name" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 text-right col-form-label">સ્તર : <span style="color: red;">*</span></label>
+                                    <div class="col-sm-10">
+                                        @Html.DropDownListFor(x => Model.StarID, new SelectList(Model.ListStar, "ID", "Star"), htmlAttributes: new { @class = "form-control", id = "drpstarm" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 text-right col-form-label">દાયિત્વ સ્તર : <span style="color: red;">*</span></label>
+                                    <div class="col-sm-10">
+                                        @*<div id="Droplistprant2">
+                                @Html.Partial("~/Views/Shared/Partial/_DDLStar.cshtml", Model)
+                            </div>*@
+                                        @*@Html.DropDownListFor(x => Model.RefID, new SelectList(Model.ListDayitvaStar, "RefID", "StarDName"), htmlAttributes: new { @class = "form-control", id = "DDLRefID" })*@
+                                        <div id="Droplistprant3">
+                                            @Html.Partial("~/Views/Shared/Partial/_DDLPrantDStar.cshtml", Model)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 text-right col-form-label">દાયિત્વ : <span style="color: red;">*</span></label>
+                                    <div class="col-sm-10">
+                                        @Html.DropDownListFor(x => Model.DayitvaID, new SelectList(Model.ListDayitva, "ID", "Dayitva"), htmlAttributes: new { @class = "form-control", id = "drpDayitva" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 text-right col-form-label">વર્ષ : </label>
+                                    <div class="col-sm-10">
+                                        <div id="Droplistnagar">
+                                            @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewData["YearD"], htmlAttributes: new { @class = "form-control", id = "Year" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <input type="button" id="btnyadisave" class="btn btn-info" value="Submit">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form id="frmrss1" method="post" enctype="multipart/form-data">
+        <div class="modal fade" id="myModal1" role="dialog">
+            <div class="modal-dialog modal-lg" style="max-width: 950px;">
+                <div class="modal-content">
+                    <div class="modal-header py-2">
+                        <h4 class="modal-title">નવી જવાબદારી આપો</h4>
+                        <button type="button" onclick="myFunction()" class="close">&times;</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 text-right col-form-label">NAME : <span style="color: red;">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="hidden" id="YadiID1" name="YadiID">
+                                        <input type="hidden" id="PravasiID1" name="PravasiID">
+                                        <input type="text" class="form-control" id="Name1" name="Name" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 text-right col-form-label">સ્તર : <span style="color: red;">*</span></label>
+                                    <div class="col-sm-10">
+                                        @Html.DropDownListFor(x => Model.StarID, new SelectList(Model.ListStar, "ID", "Star"), htmlAttributes: new { @class = "form-control", id = "drpstarmdrp" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 text-right col-form-label">દાયિત્વ સ્તર : <span style="color: red;">*</span></label>
+                                    <div class="col-sm-10">
+                                        <div id="Droplistprant2">
+                                            @Html.Partial("~/Views/Shared/Partial/_DDLStar.cshtml", Model)
+                                        </div>
+                                        @*@Html.DropDownListFor(x => Model.RefID, new SelectList(Model.ListDayitvaStar, "RefID", "StarDName"), htmlAttributes: new { @class = "form-control", id = "DDLRefID" })*@
+                                        @*<div id="Droplistprant3">
+                                @Html.Partial("~/Views/Shared/Partial/_DDLPrantDStar.cshtml", Model)
+                            </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 text-right col-form-label">દાયિત્વ : <span style="color: red;">*</span></label>
+                                    <div class="col-sm-10">
+                                        @Html.DropDownListFor(x => Model.DayitvaID, new SelectList(Model.ListDayitva, "ID", "Dayitva"), htmlAttributes: new { @class = "form-control", id = "drpDayitva1" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 text-right col-form-label">વર્ષ : </label>
+                                    <div class="col-sm-10">
+                                        <div id="Droplistnagar">
+                                            @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewData["YearD"], htmlAttributes: new { @class = "form-control", id = "Year1" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <input type="button" id="btnyadisave2" class="btn btn-info" value="Submit">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <section class="content">
+        <div class="card card-info">
+            <div class="card-body">
+                <div id="divListing">
+                    @Html.Partial("~/Views/Shared/Partial/_ViewPravasiyaditable.cshtml", Model)
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+<!-- /.content-wrapper -->
+@section scripts
+{
+
+    <script>
+        function selectOnlyThis(id) {
+            for (var i = 1; i <= 4; i++) {
+                if ("customCheckbox" + i === id && document.getElementById("customCheckbox" + i).checked === true) {
+                    document.getElementById("customCheckbox" + i).checked = true;
+                } else {
+                    document.getElementById("customCheckbox" + i).checked = false;
+                }
+            }
+        }
+    </script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("a").filter(".nav-link active").removeClass("nav-link active");
+            $("#pravasiyadi").addClass("nav-link active");
+            $("#Master").addClass("nav-link active");
+            $("li").filter(".nav-item menu-open").removeClass("nav-item menu-open");
+            $("#Masterli").addClass("nav-item menu-open");
+            $('#drpstar').change(function () {
+                //alert($('#drpBhag option:selected').val());
+                if ($('#drpstar option:selected').val() != "0") {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Master/Starbyid",
+                        data: { StarID: $('#drpstar option:selected').val() },
+                        timeout: 600000,
+                        success: function (data) {
+
+                            if (data == "-1") {
+                                window.location.href = "/account/logoff";
+                            }
+                            else if (data == "0") {
+
+                                toastr.error("Record Not Found!! ");
+
+                            }
+                            else {
+                                $("#Droplistprant").html(data);
+
+                            }
+
+                        },
+                    });
+                }
+            });
+
+            $('#drpstarmdrp').change(function () {
+                //alert($('#drpBhag option:selected').val());
+                if ($('#drpstarmdrp option:selected').val() != "0") {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Master/Starbyid",
+                        data: { StarID: $('#drpstarmdrp option:selected').val() },
+                        timeout: 600000,
+                        success: function (data) {
+
+                            if (data == "-1") {
+                                window.location.href = "/account/logoff";
+                            }
+                            else if (data == "0") {
+
+                                toastr.error("Record Not Found!! ");
+
+                            }
+                            else {
+                                $("#Droplistprant2").html(data);
+
+                            }
+
+                        },
+                    });
+                }
+            });
+
+            
+            $("#btnyadisave").click(function () {
+                var TValidate = true;
+
+                if (TValidate) {
+                    if ($("#Name").val() == "") {
+                        toastr.error("Name");
+                        $("#Name").focus();
+                        TValidate = false;
+                    }
+                }
+
+                if (TValidate) {
+                    if ($("#drpstarm").val() == "0") {
+                        toastr.error("Please Select Star");
+                        $("#drpstarm").focus();
+                        TValidate = false;
+                    }
+                }
+
+                if (TValidate) {
+                    if ($("#DDLRefID").val() == "0") {
+                        toastr.error("Please Select Dayitvastar");
+                        $("#DDLRefID").focus();
+                        TValidate = false;
+                    }
+                }
+                if (TValidate) {
+                    if ($("#drpDayitva").val() == "0") {
+                        toastr.error("Please Select Dayitva");
+                        $("#drpDayitva").focus();
+                        TValidate = false;
+                    }
+                }
+                if (TValidate) {
+                    if ($("#Year").val() == "No") {
+                        toastr.error("Please Select Year");
+                        $("#Year").focus();
+                        TValidate = false;
+                    }
+                }
+
+                if (TValidate) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Master/Insertprvasiyadidata",
+                        data: $("#frmrss2").serialize(),
+                        timeout: 600000,
+                    });
+                }
+                if (TValidate) {
+                    location.reload();
+                    toastr.info("Data Saved Succesfully");
+                }
+                return TValidate;
+            });
+
+            $("#btnyadisave2").click(function () {
+                var TValidate = true;
+
+                
+                if (TValidate) {
+                    if ($("#drpstarmdrp").val() == "0") {
+                        toastr.error("Please Select Star");
+                        $("#drpstarmdrp").focus();
+                        TValidate = false;
+                    }
+                }
+
+                if (TValidate) {
+                    if ($("#drpviBhag").val() == "0") {
+                        toastr.error("Please Select Dayitvastar");
+                        $("#drpviBhag").focus();
+                        TValidate = false;
+                    }
+                }
+                if (TValidate) {
+                    if ($("#drpDayitva1").val() == "0") {
+                        toastr.error("Please Select Dayitva");
+                        $("#drpDayitva1").focus();
+                        TValidate = false;
+                    }
+                }
+                if (TValidate) {
+                    if ($("#Year1").val() == "No") {
+                        toastr.error("Please Select Year");
+                        $("#Year1").focus();
+                        TValidate = false;
+                    }
+                }
+
+                if (TValidate) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Master/Insertprvasiyadidata",
+                        data: $("#frmrss1").serialize(),
+                        timeout: 600000,
+                    });
+                }
+
+                if (TValidate) {
+                    location.reload();
+                    toastr.info("Data Saved Succesfully");
+                }
+                return TValidate;
+            });
+
+        });
+
+        function Update(YadiID, Name, Mobile, Mail, Nagar, StarID, DayitvaID, PravasiID, Year, RefID) {
+            //alert(RefID);
+            $("#YadiID").val(YadiID);
+            $("#Name").val(Name);
+            $("#Mobile").val(Mobile);
+            $("#Mail").val(Mail);
+            $("#Nagar").val(Nagar);
+            $("#drpstarm").val(StarID);
+            $("#drpDayitva").val(DayitvaID);
+            $("#PravasiID").val(PravasiID);
+            $("#Year").val(Year);
+            $("#DDLRefID").val(RefID);
+
+            $.ajax({
+                type: "POST",
+                url: "/Master/DayitvaStarbyPravasi",
+                data: $("#frmrss2").serialize(),
+                timeout: 600000,
+                success: function (data) {
+
+                    if (data == "-1") {
+                        window.location.href = "/account/logoff";
+                    }
+                    else if (data == "0") {
+
+                        toastr.error("Record Not Found!! ");
+
+                    }
+                    else {
+                        $("#Droplistprant3").html(data);
+
+                    }
+
+                },
+            });
+
+        }
+
+        function AddData(YadiID, Name, Mobile, Mail, Nagar, StarID, DayitvaID, PravasiID, Year, RefID) {
+            //alert(RefID);
+            $("#YadiID1").val(YadiID);
+            $("#Name1").val(Name);
+            $("#Mobile").val(Mobile);
+            $("#Mail").val(Mail);
+            $("#Nagar").val(Nagar);
+            $("#drpstarm").val(StarID);
+            $("#drpDayitva").val(DayitvaID);
+            $("#PravasiID1").val(PravasiID);
+            $("#Year").val(Year);
+            $("#DDLRefID").val(RefID);
+        }
+
+        function myFunction() {
+            var txt;
+            var xyz;
+            var r = confirm("Are You Sure You Want To close");
+            if (r == true) {
+                txt = $("#myModal1").modal('hide');
+                xyz = $("#myModal2").modal('hide');
+
+            }
+        }
+
+
+    </script>
+}

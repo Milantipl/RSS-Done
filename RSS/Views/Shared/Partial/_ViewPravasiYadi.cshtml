@@ -1,0 +1,136 @@
+﻿@model ConnectionLibrary.Model.Result
+
+
+
+
+<div class="card card-info">
+    <input type="hidden" id="hdntotal" name="Total" value="@Model.Total" />
+    
+    @if (Model.ViewPravasikaryakarta != null)
+    {
+        <div class="card-header">
+            <h3 class="card-title">સ્વયંસેવકો ની યાદી (Total : @Model.ViewPravasikaryakarta.Count)</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="row">
+            </div>
+            @*<div class="col-md-12 text-right">
+                    <a href="@Url.Action("Createyadi","Master")">Add New Yadi</a>
+                </div>*@
+
+            <div class="table-responsive">
+                <table id="example1" class="table table-bordered table-striped dataTable dtr-inline">
+                    <thead class="m-head">
+                        <tr>
+                            <th>ક્રમ</th>
+                            <th>નામ</th>
+                            <th>અટક</th>
+                            <th>મોબાઇલ</th>
+                            <th>પ્રવાસીક્રમ</th>
+                            <th>સ્તર</th>
+                            <th>દાયત્વ</th>
+                            <th>Year</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+
+
+                    <tbody>
+                        @foreach (var item in Model.ViewPravasikaryakarta)
+                        {
+                        <tr>
+                            <td>@item.YadiId</td>
+                            <td>@item.Name</td>
+                            <td>@item.Surname</td>
+                            <td>@item.Mobile</td>
+                            <td>@item.Pravasi</td>
+                            <td>@item.Star</td>
+                            <td>@item.Dayitva</td>
+                            <td>@item.Year</td>
+                            
+
+                           
+                            <td>
+                              <a OnClick="javascript: Update( @item.YadiId , '@item.Name', '@item.Surname', '@item.Mobile', '@item.Pravasi', '@item.StarID', '@item.DayitvaID', '@item.Year');" title="Edit" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal2"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+
+
+    }
+    else
+    {
+        <div class="card-header">
+            <h3 class="card-title">સ્વયંસેવકો ની યાદી (Total : 0 )</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            </div>
+        </div>
+        <!-- /.card-header -->
+
+
+        <div class="card-body">
+            <div class="row">
+
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped dataTable dtr-inline">
+                    <thead class="m-head">
+                        <tr>
+                            <th>ક્રમ</th>
+                            <th>નામ</th>
+                            <th>પિતાજીનું નામ</th>
+                            <th>અટક</th>
+                            <th>ભાગ</th>
+                            <th>નગર</th>
+                            <th>મોબાઈલ નંબર</th>
+                            <th>ઈ-મેલ</th>
+                            <th>જન્મ તારીખ</th>
+                            <th>બ્લડ ગ્રુપ</th>
+                            <th>નિવાસી વસ્તી</th>
+                            <th>મિલનનો પ્રકાર</th>
+                            <th>શાખાનું નામ</th>
+                            <th>કર્મચારી ની માહિતી</th>
+                            <th>વ્યવસાય</th>
+                            <th>ભણતર​</th>
+                            <th>સંઘ પ્રશિક્ષણ</th>
+                            <th>વર્તમાન દાયિત્વ</th>
+                            <th>દાયિત્વ પસંદ</th>
+                            <th>ગતિવિધિ</th>
+                            <th>પદાધિકારી</th>
+                            <th>ગણવેશ</th>
+                            <th>ઘોષવાદ્ય</th>
+                            <th>સંઘ પ્રવેશ </th>
+                            <th>અભિરુચિ</th>
+                            <th>અન્ય સંસ્થા</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td colspan="5">
+                                <h4>No Record Found !!</h4>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    }
+</div>
