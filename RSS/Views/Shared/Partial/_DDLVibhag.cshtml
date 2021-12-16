@@ -6,6 +6,7 @@
     @Html.DropDownListFor(x => Model.BhagID, new SelectList(Model.ListBhag, "BhagID", "Bhag"), htmlAttributes: new { @class = "form-control", id = "drpBhag" })
 
 }
+
 else
 {
     <select class="form-control" id="drpBhag">
@@ -14,10 +15,9 @@ else
     </select>
 }
 
-
 <script>
     $('#drpBhag').change(function () {
-      
+
         if ($('#drpBhag option:selected').val() != "0") {
             $.ajax({
                 type: "GET",
@@ -44,5 +44,5 @@ else
         }
     });
 
-    
+
 </script>

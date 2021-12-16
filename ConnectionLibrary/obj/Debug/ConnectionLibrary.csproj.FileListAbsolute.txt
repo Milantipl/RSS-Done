@@ -35,3 +35,8 @@ D:\Milan\Back-up project\RSS\ConnectionLibrary\bin\Debug\ConnectionLibrary.pdb
 D:\Milan\Back-up project\RSS\ConnectionLibrary\obj\Debug\ConnectionLibrary.csproj.CoreCompileInputs.cache
 D:\Milan\Back-up project\RSS\ConnectionLibrary\obj\Debug\ConnectionLibrary.dll
 D:\Milan\Back-up project\RSS\ConnectionLibrary\obj\Debug\ConnectionLibrary.pdb
+D:\GitHub\RSS-Done\ConnectionLibrary\bin\Debug\ConnectionLibrary.dll
+D:\GitHub\RSS-Done\ConnectionLibrary\bin\Debug\ConnectionLibrary.pdb
+D:\GitHub\RSS-Done\ConnectionLibrary\obj\Debug\ConnectionLibrary.csproj.CoreCompileInputs.cache
+D:\GitHub\RSS-Done\ConnectionLibrary\obj\Debug\ConnectionLibrary.dll
+D:\GitHub\RSS-Done\ConnectionLibrary\obj\Debug\ConnectionLibrary.pdb

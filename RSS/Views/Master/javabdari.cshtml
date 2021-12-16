@@ -48,12 +48,7 @@
                                     <div class="col-sm-10">
                                         @Html.DropDownListFor(x => Model.PrantID, new SelectList(Model.ListPrant, "PrantID", "PrantName"), htmlAttributes: new { @class = "form-control", id = "drpPrant" })
                                     </div>
-                                    <div class="col-sm-1">
-                                        <div class="custom-control custom-checkbox mt-1">
-                                            <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1" onclick="selectOnlyThis(this.id)">
-                                            <label for="customCheckbox1" class="custom-control-label"></label>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -65,12 +60,7 @@
                                             @Html.Partial("~/Views/Shared/Partial/_DDLVibhagPrant.cshtml", Model)
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <div class="custom-control custom-checkbox mt-1">
-                                            <input class="custom-control-input" type="checkbox" id="customCheckbox2" value="option1" onclick="selectOnlyThis(this.id)">
-                                            <label for="customCheckbox2" class="custom-control-label"></label>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -84,7 +74,7 @@
                                     </div>
                                     <div class="col-sm-1">
                                         <div class="custom-control custom-checkbox mt-1">
-                                            <input class="custom-control-input" type="checkbox" id="customCheckbox3" value="option1" onclick="selectOnlyThis(this.id)">
+                                            <input class="custom-control-input" type="checkbox" id="customCheckbox3" value="option1" onclick="(this.id)">
                                             <label for="customCheckbox3" class="custom-control-label"></label>
                                         </div>
                                     </div>
@@ -114,10 +104,10 @@
                 </div>
                 <div class="card card-info">
 
-                        <div id="Datalist">
-                            @Html.Partial("~/Views/Shared/Partial/_ViewJavabdari.cshtml", Model)
-                        </div>
+                    <div id="Datalist">
+                        @Html.Partial("~/Views/Shared/Partial/_ViewJavabdari.cshtml", Model)
                     </div>
+                </div>
                 <!-- /.card -->
             </div>
             <!-- /.container-fluid -->
@@ -138,6 +128,10 @@
                 }
             }
         }
+    </script>
+
+    <script>
+
     </script>
 
     <script type="text/javascript">
@@ -175,20 +169,28 @@
                 }
             });
 
+            $("#customCheckbox3").click(function () {
+                var TValidate = true;
+
+                if (TValidate) {
+                    if ($(this).is(":checked"))
+                        alert('you are unchecked ' + $("#drpBhag").val());
+                }
+                if (TValidate) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Master/SearchViNagar",
+                        data: { BhagIDCHeck : $("#drpBhag").val() },
+                    })
+                }
+            });
+
 
             $("#btnSearch").click(function () {
                 // alert($('#drpNagar option:selected').val());
                 var TValidate = true;
-                @*if (TValidate) {
-                    if ($("#drpBhag").val() == "0") {
-                        toastr.error("Please Select Bhag");
-                        $("#drpBhag").focus();
-                        TValidate = false;
-                    }
-                }*@
 
                 if (TValidate) {
-
                     $.ajax({
                         type: "POST",
                         url: "/Master/SearchViNagar",

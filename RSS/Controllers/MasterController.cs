@@ -324,7 +324,7 @@ namespace RSS.Controllers
                     _var = 1;
                     WhereClauseAdd = "and PravasiKaryakarta.RefID=" + Nagar.VibhagID;
                 }
-                if (Nagar.BhagID.ToString() != "0")
+                if (Nagar.BhagID.ToString() != "0" )
                 {
                     _var = 2;
                     WhereClauseAdd = "and PravasiKaryakarta.RefID=" + Nagar.BhagID;
@@ -334,8 +334,22 @@ namespace RSS.Controllers
                     _var = 3;
                     WhereClauseAdd = "and PravasiKaryakarta.RefID=" + Nagar.NagarID;
                 }
+
+                if (Nagar.BhagIDCHeck.ToString() != "0")
+                {
+                    _var = 2;
+                    WhereClauseAdd = "and PravasiKaryakarta.RefID=" + Nagar.BhagIDCHeck + " OR Yadi.BhagID=" + Nagar.BhagIDCHeck;
+                }
+                //if (Nagar.BhagIDCHeck.ToString() != "0")
+                //{
+                //    _var = 2;
+                //    WhereClauseAdd = "and PravasiKaryakarta.RefID=" + Nagar.BhagIDCHeck + " OR Yadi.BhagID=" + Nagar.BhagIDCHeck;
+                //}
+
                 var WhereClause = "where PravasiKaryakarta.StarID=" + _var;
                 WhereClause = WhereClause + WhereClauseAdd;
+
+
 
                 model.ViewJavabdari = MasterRepository.ViewjavabdariByID(WhereClause);
                 if (model.ViewJavabdari.Count > 0)

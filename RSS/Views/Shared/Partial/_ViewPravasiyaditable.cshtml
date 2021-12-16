@@ -23,7 +23,7 @@
             <table id="example1" class="table table-bordered table-striped dataTable dtr-inline">
                 <thead class="m-head">
                     <tr>
-                        
+
                         <th>ક્રમ</th>
                         <th>નામ</th>
                         <th>મોબાઈલ નંબર</th>
@@ -37,26 +37,35 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model.ListYadis)
-                    { 
-                    <tr>
-                        <td>@item.YadiID</td>
-                        <td>@item.Name</td>
-                        <td>@item.Mobile</td>
-                        <td>@item.Mail</td>
-                        <td>@item.Nagar</td>
-                        <td>@item.Star</td>
-                        <td>@item.Dayitva</td>
-                        <td>@item.PravasiID</td>
-                        <td class="text-center">
-                            <a OnClick="javascript: Update( @item.YadiID , '@item.Name', '@item.Mobile', '@item.Mail', '@item.Nagar', '@item.StarID', '@item.DayitvaID', '@item.PravasiID', '@item.Year' ,'@item.RefID' );" title="Edit" class="btn btn-info btn-sm" id="strapddledit" data-toggle="modal" data-target="#myModal2"><i class="fa fa-edit"></i></a>
-                            <a OnClick="javascript: AddData( @item.YadiID , '@item.Name', '@item.Mobile', '@item.Mail', '@item.Nagar', '@item.StarID', '@item.DayitvaID', '@item.PravasiID', '@item.Year' ,'@item.RefID' );" title="Edit" class="btn btn-info btn-sm" id="strapddledit" data-toggle="modal" data-target="#myModal1"><i class="fa fa-user-plus"></i></a>
-                            @*<a class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal1" ><i class="fa fa-user-plus"></i></a>*@
-                        </td>
-                    </tr>
+                    {
+                        <tr>
+                            <td>@item.YadiID</td>
+                            <td>@item.Name</td>
+                            <td>@item.Mobile</td>
+                            <td>@item.Mail</td>
+                            <td>@item.Nagar</td>
+                            <td>@item.Star</td>
+                            <td>@item.Dayitva</td>
+                            <td>@item.PravasiID</td>
+                            <td class="text-center">
+
+                                @if (item.PravasiID > 0)
+                                {
+                                    <a OnClick="javascript: Update( @item.YadiID , '@item.Name', '@item.Mobile', '@item.Mail', '@item.Nagar', '@item.StarID', '@item.DayitvaID', '@item.PravasiID', '@item.Year' ,'@item.RefID' );" title="Edit" class="btn btn-info btn-sm" id="strapddledit" data-toggle="modal" data-target="#myModal2"><i class="fa fa-edit"></i></a>
+                                }
+
+                                @if (item.PravasiID == 0)
+                                {
+                                    <a OnClick="javascript: AddData( @item.YadiID , '@item.Name', '@item.Mobile', '@item.Mail', '@item.Nagar', '@item.StarID', '@item.DayitvaID', '@item.PravasiID', '@item.Year' ,'@item.RefID' );" title="Add" class="btn btn-info btn-sm" id="myBtn3" data-toggle="modal" data-target="#myModal1"><i class="fa fa-user-plus"></i></a>
+                                }
+
+
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
-            
+
         </div>
 
 
@@ -79,35 +88,17 @@
                         <tr>
                             <th>ક્રમ</th>
                             <th>નામ</th>
-                            <th>પિતાજીનું નામ</th>
-                            <th>અટક</th>
-                            <th>ભાગ</th>
-                            <th>નગર</th>
                             <th>મોબાઈલ નંબર</th>
                             <th>ઈ-મેલ</th>
-                            <th>જન્મ તારીખ</th>
-                            <th>બ્લડ ગ્રુપ</th>
-                            <th>નિવાસી વસ્તી</th>
-                            <th>મિલનનો પ્રકાર</th>
-                            <th>શાખાનું નામ</th>
-                            <th>કર્મચારી ની માહિતી</th>
-                            <th>વ્યવસાય</th>
-                            <th>ભણતર​</th>
-                            <th>સંઘ પ્રશિક્ષણ</th>
-                            <th>વર્તમાન દાયિત્વ</th>
-                            <th>દાયિત્વ પસંદ</th>
-                            <th>ગતિવિધિ</th>
-                            <th>પદાધિકારી</th>
-                            <th>ગણવેશ</th>
-                            <th>ઘોષવાદ્ય</th>
-                            <th>સંઘ પ્રવેશ </th>
-                            <th>અભિરુચિ</th>
-                            <th>અન્ય સંસ્થા</th>
+                            <th>Nagar</th>
+                            <th>Star</th>
+                            <th>Dayitva</th>
+                            <th>Pravasi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="22">
+                            <td colspan="8">
                                 <h4>No Record Found !!</h4>
                             </td>
 
@@ -120,3 +111,4 @@
         </div>
     }
 </div>
+

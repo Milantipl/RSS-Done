@@ -15,6 +15,8 @@ namespace ConnectionLibrary.Model
         public string Nagar { get; set; }
         public  string Vasti { get; set; }
         public int BhagID { get; set; }
+
+        public int BhagIDCHeck { get; set; }
         public int VastiCount { get; set; }
     }
 }
