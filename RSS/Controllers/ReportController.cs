@@ -711,5 +711,35 @@ namespace RSS.Controllers
             return View(model);
         }
 
+        public ActionResult Report6()
+        {
+            var model = new Result();
+            if (Session["UID"] != null)
+            {
+                model.UserDetail = AccountRepository.GetuserDetail(Convert.ToInt32(Session["UID"]));
+                model.ListMonth = MasterRepository.GetListMonth();
+                var firstitemmonth = new _Month();
+                firstitemmonth.MonthID = 0;
+                firstitemmonth.Month = "--Select Month---";
+                model.ListMonth.Insert(0, firstitemmonth);
+                model.Report3List = MasterRepository.GetReport3();
+                if (model.UserDetail.Roleid.ToString().Trim() == "2")
+                {
+                    model.Report3List = model.Report3List.Where(x => x.VibhagID.ToString() == model.UserDetail.RoleWiseDept.ToString().Trim()).ToList();
+
+                }
+                else if (model.UserDetail.Roleid.ToString().Trim() == "3")
+                {
+                    model.Report3List = model.Report3List.Where(x => x.BhagID.ToString() == model.UserDetail.RoleWiseDept.ToString().Trim()).ToList();
+
+                }
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("LogOff", "Account");
+            }
+        }
+
     }
 }

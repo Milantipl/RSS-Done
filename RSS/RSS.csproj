@@ -565,7 +565,8 @@
     <Content Include="Views\Shared\Partial\_DDLStar.cshtml" />
     <Content Include="Views\Shared\Partial\_ViewPravasiyaditable.cshtml" />
     <Content Include="Views\Shared\Partial\_DDLPrantDStar.cshtml" />
-    <Content Include="Views\Report\Report3 - Copy.cshtml" />
+    <Content Include="Views\Report\Report3.cshtml" />
+    <Content Include="Views\Report\Report6.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConnectionLibrary\ConnectionLibrary.csproj">
