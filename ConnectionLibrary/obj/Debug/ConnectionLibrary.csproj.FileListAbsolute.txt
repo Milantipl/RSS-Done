@@ -40,3 +40,4 @@ D:\GitHub\RSS-Done\ConnectionLibrary\bin\Debug\ConnectionLibrary.pdb
 D:\GitHub\RSS-Done\ConnectionLibrary\obj\Debug\ConnectionLibrary.csproj.CoreCompileInputs.cache
 D:\GitHub\RSS-Done\ConnectionLibrary\obj\Debug\ConnectionLibrary.dll
 D:\GitHub\RSS-Done\ConnectionLibrary\obj\Debug\ConnectionLibrary.pdb
+D:\GitHub\RSS-Done\ConnectionLibrary\obj\Debug\ConnectionLibrary.csproj.AssemblyReference.cache

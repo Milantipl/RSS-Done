@@ -49,6 +49,7 @@
     <Compile Include="Model\docmodel.cs" />
     <Compile Include="Model\DocParent.cs" />
     <Compile Include="Model\Reports\ListofReport13.cs" />
+    <Compile Include="Model\Reports\ReportMis.cs" />
     <Compile Include="Model\Reports\Report13.cs" />
     <Compile Include="Model\Reports\MilanReport.cs" />
     <Compile Include="Model\Reports\NoBethakVastiReport.cs" />

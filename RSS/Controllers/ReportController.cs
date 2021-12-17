@@ -722,17 +722,17 @@ namespace RSS.Controllers
                 firstitemmonth.MonthID = 0;
                 firstitemmonth.Month = "--Select Month---";
                 model.ListMonth.Insert(0, firstitemmonth);
-                model.Report3List = MasterRepository.GetReport3();
-                if (model.UserDetail.Roleid.ToString().Trim() == "2")
-                {
-                    model.Report3List = model.Report3List.Where(x => x.VibhagID.ToString() == model.UserDetail.RoleWiseDept.ToString().Trim()).ToList();
+                model.ReportMisList = MasterRepository.GetReportMis();
+                //if (model.UserDetail.Roleid.ToString().Trim() == "2")
+                //{
+                //    model.ReportMisList = model.ReportMisList.Where(x => x.BhagPravasi.ToString() == model.UserDetail.RoleWiseDept.ToString().Trim()).ToList();
 
-                }
-                else if (model.UserDetail.Roleid.ToString().Trim() == "3")
-                {
-                    model.Report3List = model.Report3List.Where(x => x.BhagID.ToString() == model.UserDetail.RoleWiseDept.ToString().Trim()).ToList();
+                //}
+                //else if (model.UserDetail.Roleid.ToString().Trim() == "3")
+                //{
+                //    model.ReportMisList = model.ReportMisList.Where(x => x.NagarPravasi.ToString() == model.UserDetail.RoleWiseDept.ToString().Trim()).ToList();
 
-                }
+                //}
                 return View(model);
             }
             else

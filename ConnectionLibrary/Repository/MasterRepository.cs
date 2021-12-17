@@ -2018,6 +2018,32 @@ Where PK.NagarID=" + NagarID);
                 return null;
             }
         }
+
+        public static List<ReportMis> GetReportMis()
+        {
+            var result = new List<ReportMis>();
+            try
+            {
+                var cn = new ConnectionClass();
+                DataTable dt = cn.ExecuteProcedure<DataTable>("PravasiCount");
+                if (dt.Rows.Count > 0)
+                {
+                    result = dt.ToListof<ReportMis>();
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception Ex)
+            {
+                return null;
+            }
+        }
+
+
         public static List<Report4> GetReport4(List<Tuple<string, string, SqlDbType, int?>> list)
         {
             var result = new List<Report4>();

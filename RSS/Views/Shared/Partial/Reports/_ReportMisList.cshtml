@@ -1,0 +1,46 @@
+﻿@model ConnectionLibrary.Model.Result
+@{
+    var TotalBhag = 0; var BhagPravasiTotal = 0; var NagarPravasiTotal = 0; var VibhagPravasiTotal = 0; var SUSSTotal = 0;
+}
+
+<table class="table table-bordered text-center mb-0">
+    <thead>
+        <tr class="bg-primary">
+            @*<td>Name</td>*@
+            <th class="align-middle">Bhag</th>
+            <th class="align-middle">BhagPravasi</th>
+            <th class="align-middle">NagarPravasi</th>
+            <th class="align-middle">VibhagPravasi </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ConnectionLibrary.Model.Reports.ReportMis item in Model.ReportMisList)
+        {
+            <tr>
+                @*<td>Name</td>*@
+                <td>@item.Bhag</td>
+                <td>@item.BhagPravasi</td>
+                <td>@item.NagarPravasi</td>
+                <td>@item.VibhagPravasi</td>
+            </tr>
+
+            {
+                TotalBhag = TotalBhag + item.Bhag;
+                BhagPravasiTotal = BhagPravasiTotal + item.BhagPravasi;
+                NagarPravasiTotal = NagarPravasiTotal + item.NagarPravasi;
+                VibhagPravasiTotal = VibhagPravasiTotal + item.VibhagPravasi;
+            }
+        }
+    </tbody>
+    <tfoot class="bg-warning">
+        <tr>
+            @*<td colspan="1" accesskey>યોગ</td>*@
+            <td>@TotalBhag</td>
+            <td>@BhagPravasiTotal</td>
+            <td>@NagarPravasiTotal</td>
+            <td>@VibhagPravasiTotal</td>
+            
+        </tr>
+    </tfoot>
+</table>

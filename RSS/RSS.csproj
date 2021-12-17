@@ -526,7 +526,7 @@
     <Content Include="Views\Report\Report2.cshtml" />
     <Content Include="Views\Shared\Partial\Reports\_Report1List.cshtml" />
     <Content Include="Views\Shared\Partial\Reports\_Report2List.cshtml" />
-    <Content Include="Views\Shared\Partial\Reports\_Report3List.cshtml" />
+    <Content Include="Views\Shared\Partial\Reports\_ReportMisList.cshtml" />
     <Content Include="Views\Report\Report4.cshtml" />
     <Content Include="Views\Shared\Partial\Reports\_Report10List.cshtml" />
     <Content Include="Views\Shared\Partial\Reports\_Report11List.cshtml" />
@@ -567,6 +567,7 @@
     <Content Include="Views\Shared\Partial\_DDLPrantDStar.cshtml" />
     <Content Include="Views\Report\Report3.cshtml" />
     <Content Include="Views\Report\Report6.cshtml" />
+    <Content Include="Views\Shared\Partial\Reports\_Report3List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConnectionLibrary\ConnectionLibrary.csproj">

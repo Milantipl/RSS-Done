@@ -152,6 +152,7 @@ namespace ConnectionLibrary.Model
         public List<Report10> Report10List { get; set; }
         public List<Report11> Report11List { get; set; }
         public List<Report12> Report12List { get; set; }
+        public List<ReportMis> ReportMisList { get; set; }
         public List<DashboardCounts> DashboardCountList { get; set; }
         public List<DashboardBandhShakha> DashboardBandShakhaList { get; set; }
         public List<DashboardNivasikaryakarta> DashboardNivasiKaryakartaList { get; set; }
