@@ -524,7 +524,6 @@
     <Content Include="Views\Shared\Partial\_ViewPravasiKaryakarta.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Report\Report2.cshtml" />
-    <Content Include="Views\Report\Report3.cshtml" />
     <Content Include="Views\Shared\Partial\Reports\_Report1List.cshtml" />
     <Content Include="Views\Shared\Partial\Reports\_Report2List.cshtml" />
     <Content Include="Views\Shared\Partial\Reports\_Report3List.cshtml" />
@@ -566,6 +565,7 @@
     <Content Include="Views\Shared\Partial\_DDLStar.cshtml" />
     <Content Include="Views\Shared\Partial\_ViewPravasiyaditable.cshtml" />
     <Content Include="Views\Shared\Partial\_DDLPrantDStar.cshtml" />
+    <Content Include="Views\Report\Report3 - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConnectionLibrary\ConnectionLibrary.csproj">
